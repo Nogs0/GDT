@@ -2,7 +2,7 @@
 
 ![Static Badge](https://img.shields.io/badge/Learning-PHP-blue) ![Static Badge](https://img.shields.io/badge/Learning-Laravel-red)
 
-## About GDT
+## About GDT - Gestão de Treinamentos
 
 GDT is a management software currently in development, designed to enhance my PHP skills using Laravel Framework and assist in managing my workouts.
 
