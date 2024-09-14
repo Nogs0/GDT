@@ -12,6 +12,38 @@ use Throwable;
 
 class TreinoController extends Controller
 {
+    /**
+     * @OA\Get(
+     *     path="/api/treinos",
+     *     summary="Retorna lista de treinos",
+     *     tags={"Treinos"},
+     *     @OA\Response(response="200", description="Lista de treinos")
+     * )
+     */
+    public function getAll()
+    {
+        try {
+            return Treino::all()->toJson();
+        } catch (\Throwable $e) {
+            return response()->json(['erro' => $e->getMessage()]);
+        }
+    }
+
+    /**
+     * @OA\Get(
+     *     path="/api/treinos/{id}",
+     *     summary="Retorna um exercicio pelo id",
+     *     tags={"Treinos"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="id do treino que deseja",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(response="200", description="Treino")
+     * )
+     */
     public function get($id)
     {
         try {
@@ -27,6 +59,26 @@ class TreinoController extends Controller
         }
     }
 
+    /**
+     * @OA\Post(
+     *     path="/api/treinos/",
+     *     summary="Cadastra um treino",
+     *     tags={"Treinos"},
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="object",
+     *                 required={"grupamento_muscular", "foco"},
+     *                 @OA\Property(property="grupamento_muscular", type="string", example="Supino reto"),
+     *                 @OA\Property(property="foco", type="string", example="Hipertrofia")
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(response="200", description="Treino atualizado")
+     * )
+     */
     public function create(Request $request)
     {
         try {
@@ -45,6 +97,27 @@ class TreinoController extends Controller
         }
     }
 
+    /**
+     * @OA\Put(
+     *     path="/api/treinos/",
+     *     summary="Atualiza um treino",
+     *     tags={"Treinos"},
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="object",
+     *                 required={"id", "grupamento_muscular", "foco"},
+     *                 @OA\Property(property="id", type="integer", example=1),
+     *                 @OA\Property(property="grupamento_muscular", type="string", example="Supino reto"),
+     *                 @OA\Property(property="foco", type="string", example="Hipertrofia")
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(response="200", description="Treino atualizado")
+     * )
+     */
     public function update(Request $request)
     {
         try {
@@ -60,6 +133,7 @@ class TreinoController extends Controller
             $treino->grupamento_muscular = $request->input('grupamento_muscular');
             $treino->foco = $request->input('foco');
         
+            return response()->json($treino, 200);
         } catch (ValidationException $e) {
             return response()->json(['message' => 'Validation error', 'errors' => $e->getMessage()], 422);
         } catch (Throwable $e) {
@@ -67,6 +141,21 @@ class TreinoController extends Controller
         }
     }
 
+    /**
+     * @OA\Delete(
+     *     path="/api/treinos/{id}",
+     *     summary="Exclui um treino",
+     *     tags={"Treinos"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="id do treino que deseja excluir",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(response="200", description="")
+     * )
+     */
     public function delete($id)
     {
         try {

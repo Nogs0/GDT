@@ -1,0 +1,493 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "GDT",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/clientes": {
+            "get": {
+                "tags": [
+                    "Clientes"
+                ],
+                "summary": "Retorna lista de clientes",
+                "operationId": "22b5c2745ab1a9cb696191b437bf924c",
+                "responses": {
+                    "200": {
+                        "description": "Lista de clientes"
+                    }
+                }
+            }
+        },
+        "/api/clientes/{id}": {
+            "get": {
+                "tags": [
+                    "Clientes"
+                ],
+                "summary": "Retorna um cliente pelo id",
+                "operationId": "15931a6e5b60a2e66dfa2253a81dbc69",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id do cliente que deseja",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Cliente"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Clientes"
+                ],
+                "summary": "Exclui um cliente",
+                "operationId": "51e0e6b7af9e46753298f685e5e523e1",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id do cliente que deseja excluir",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/api/clienteTreinos/{id}": {
+            "get": {
+                "tags": [
+                    "Clientes"
+                ],
+                "summary": "Retorna o cliente e seus treinos",
+                "operationId": "c8541e5cd65d07a666c2b14a5e110041",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id do cliente que deseja",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Cliente e seus treinos"
+                    }
+                }
+            }
+        },
+        "/api/clientes/": {
+            "put": {
+                "tags": [
+                    "Clientes"
+                ],
+                "summary": "Atualiza um cliente",
+                "operationId": "8f12bfc04151d16e9a85df2dff9272a3",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "id",
+                                    "nome",
+                                    "email",
+                                    "telefone",
+                                    "objetivo"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "nome": {
+                                        "type": "string",
+                                        "example": "John Doe"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "john.doe@example.com"
+                                    },
+                                    "telefone": {
+                                        "type": "string",
+                                        "example": "35 99822 4443"
+                                    },
+                                    "objetivo": {
+                                        "type": "string",
+                                        "example": "Emagrecer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Cliente atualizado"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Clientes"
+                ],
+                "summary": "Cadastra um cliente",
+                "operationId": "b05062f6e14e36c64b19fd3fdb769550",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "nome",
+                                    "email",
+                                    "telefone",
+                                    "objetivo"
+                                ],
+                                "properties": {
+                                    "nome": {
+                                        "type": "string",
+                                        "example": "John Doe"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "john.doe@example.com"
+                                    },
+                                    "telefone": {
+                                        "type": "string",
+                                        "example": "35 99822 4443"
+                                    },
+                                    "objetivo": {
+                                        "type": "string",
+                                        "example": "Emagrecer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Cliente criado"
+                    }
+                }
+            }
+        },
+        "/api/exercicios": {
+            "get": {
+                "tags": [
+                    "Exercícios"
+                ],
+                "summary": "Retorna lista de exercícios",
+                "operationId": "4127fb76bb7ca9616a48a3c7595f65e3",
+                "responses": {
+                    "200": {
+                        "description": "Lista de exercícios"
+                    }
+                }
+            }
+        },
+        "/api/exercicios/{id}": {
+            "get": {
+                "tags": [
+                    "Exercícios"
+                ],
+                "summary": "Retorna um exercicio pelo id",
+                "operationId": "4320a4589ba49880cf59619f6a7fc0a6",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id do exercício que deseja",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Exercício"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Exercícios"
+                ],
+                "summary": "Exclui um exercício",
+                "operationId": "abf6a358019f3ad818a2367a2cdef771",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id do exercício que deseja excluir",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/api/exercicios/": {
+            "put": {
+                "tags": [
+                    "Exercícios"
+                ],
+                "summary": "Atualiza um exercício",
+                "operationId": "8bbf96004f657a3b81dfdb1bbc1266e0",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "id",
+                                    "nome",
+                                    "is_aparelho"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "nome": {
+                                        "type": "string",
+                                        "example": "Supino reto"
+                                    },
+                                    "is_aparelho": {
+                                        "type": "boolean",
+                                        "example": true
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Exercício atualizado"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Exercícios"
+                ],
+                "summary": "Cadastra um exercício",
+                "operationId": "170ae079ef156cd84728cb16d384f560",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "nome",
+                                    "is_aparelho"
+                                ],
+                                "properties": {
+                                    "nome": {
+                                        "type": "string",
+                                        "example": "Supino reto"
+                                    },
+                                    "is_aparelho": {
+                                        "type": "boolean",
+                                        "example": "true"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Exercício criado"
+                    }
+                }
+            }
+        },
+        "/api/treinos": {
+            "get": {
+                "tags": [
+                    "Treinos"
+                ],
+                "summary": "Retorna lista de treinos",
+                "operationId": "0de04d8c850f4aa1021fb5487bcbc6b2",
+                "responses": {
+                    "200": {
+                        "description": "Lista de treinos"
+                    }
+                }
+            }
+        },
+        "/api/treinos/{id}": {
+            "get": {
+                "tags": [
+                    "Treinos"
+                ],
+                "summary": "Retorna um exercicio pelo id",
+                "operationId": "33cb78dec323473267768bcfcf79db77",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id do treino que deseja",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Treino"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Treinos"
+                ],
+                "summary": "Exclui um treino",
+                "operationId": "e7252d6bfcfb061aade51af83592a384",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id do treino que deseja excluir",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/api/treinos/": {
+            "put": {
+                "tags": [
+                    "Treinos"
+                ],
+                "summary": "Atualiza um treino",
+                "operationId": "c2fe531f89fdfcb2feb9c24eb3ea5811",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "id",
+                                    "grupamento_muscular",
+                                    "foco"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "grupamento_muscular": {
+                                        "type": "string",
+                                        "example": "Supino reto"
+                                    },
+                                    "foco": {
+                                        "type": "string",
+                                        "example": "Hipertrofia"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Treino atualizado"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Treinos"
+                ],
+                "summary": "Cadastra um treino",
+                "operationId": "8e8a7c149c6c195aba9ccd336b43223b",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "grupamento_muscular",
+                                    "foco"
+                                ],
+                                "properties": {
+                                    "grupamento_muscular": {
+                                        "type": "string",
+                                        "example": "Supino reto"
+                                    },
+                                    "foco": {
+                                        "type": "string",
+                                        "example": "Hipertrofia"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Treino atualizado"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Clientes",
+            "description": "Clientes"
+        },
+        {
+            "name": "Exercícios",
+            "description": "Exercícios"
+        },
+        {
+            "name": "Treinos",
+            "description": "Treinos"
+        }
+    ]
+}
