@@ -14,7 +14,7 @@
                 "operationId": "0a0f1b87afc8418faafedb5d58223e79",
                 "parameters": [
                     {
-                        "name": "página",
+                        "name": "pagina",
                         "in": "path",
                         "description": "Página que deseja",
                         "required": true,

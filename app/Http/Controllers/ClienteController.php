@@ -16,7 +16,7 @@ class ClienteController extends Controller
      *     summary="Retorna lista de clientes",
      *     tags={"Clientes"},
      *     @OA\Parameter(
-     *         name="página",
+     *         name="pagina",
      *         in="path",
      *         description="Página que deseja",
      *         required=true,

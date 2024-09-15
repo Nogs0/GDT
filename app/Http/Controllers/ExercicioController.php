@@ -16,7 +16,7 @@ class ExercicioController extends Controller
      *     summary="Retorna lista de exercícios",
      *     tags={"Exercícios"},
      *     @OA\Parameter(
-     *         name="página",
+     *         name="pagina",
      *         in="path",
      *         description="Página que deseja",
      *         required=true,

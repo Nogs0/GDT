@@ -19,7 +19,7 @@ class TreinoController extends Controller
      *     summary="Retorna lista de treinos",
      *     tags={"Treinos"},
      *     @OA\Parameter(
-     *         name="página",
+     *         name="pagina",
      *         in="path",
      *         description="Página que deseja",
      *         required=true,
