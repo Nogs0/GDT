@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Dtos\PagedResultDto;
 use App\Dtos\TreinoDto;
 use App\Models\ClienteTreino;
 use App\Models\Treino;
@@ -14,16 +15,40 @@ class TreinoController extends Controller
 {
     /**
      * @OA\Get(
-     *     path="/api/treinos",
+     *     path="/api/treinosGetAll/{pagina}",
      *     summary="Retorna lista de treinos",
      *     tags={"Treinos"},
+     *     @OA\Parameter(
+     *         name="página",
+     *         in="path",
+     *         description="Página que deseja",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
      *     @OA\Response(response="200", description="Lista de treinos")
      * )
      */
-    public function getAll()
+    public function getAll(int $pagina)
     {
         try {
-            return Treino::all()->toJson();
+
+            $count = Treino::count();
+            if (--$pagina < 0)
+                $pagina = 0;
+
+            // Definir o tamanho da página
+            $itemsPerPage = 5;
+            if ($pagina * $itemsPerPage >= $count)
+                $pagina--;
+
+            // Obter os treinos da página atual
+            $treinos = Treino::query()
+                ->skip($itemsPerPage * $pagina)
+                ->take($itemsPerPage)
+                ->get();
+
+            $pagedResultDto = new PagedResultDto($count, ++$pagina, $treinos);
+            return view('app.treinos.index', compact('pagedResultDto'));
         } catch (\Throwable $e) {
             return response()->json(['erro' => $e->getMessage()]);
         }

@@ -5,13 +5,24 @@
         "version": "1.0.0"
     },
     "paths": {
-        "/api/clientes": {
+        "/api/clientesGetAll/{pagina}": {
             "get": {
                 "tags": [
                     "Clientes"
                 ],
                 "summary": "Retorna lista de clientes",
-                "operationId": "22b5c2745ab1a9cb696191b437bf924c",
+                "operationId": "0a0f1b87afc8418faafedb5d58223e79",
+                "parameters": [
+                    {
+                        "name": "página",
+                        "in": "path",
+                        "description": "Página que deseja",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Lista de clientes"
@@ -193,13 +204,24 @@
                 }
             }
         },
-        "/api/exercicios": {
+        "/api/exerciciosGetAll/{pagina}": {
             "get": {
                 "tags": [
                     "Exercícios"
                 ],
                 "summary": "Retorna lista de exercícios",
-                "operationId": "4127fb76bb7ca9616a48a3c7595f65e3",
+                "operationId": "4693b05af9c850e64230cfc383d12413",
+                "parameters": [
+                    {
+                        "name": "página",
+                        "in": "path",
+                        "description": "Página que deseja",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Lista de exercícios"
@@ -334,13 +356,24 @@
                 }
             }
         },
-        "/api/treinos": {
+        "/api/treinosGetAll/{pagina}": {
             "get": {
                 "tags": [
                     "Treinos"
                 ],
                 "summary": "Retorna lista de treinos",
-                "operationId": "0de04d8c850f4aa1021fb5487bcbc6b2",
+                "operationId": "08e930a92403b4b1a2fb97df95f8922f",
+                "parameters": [
+                    {
+                        "name": "página",
+                        "in": "path",
+                        "description": "Página que deseja",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Lista de treinos"

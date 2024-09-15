@@ -6,21 +6,46 @@ use App\Models\Cliente;
 use App\Dtos\ClienteWithTreinosDto;
 use Dotenv\Exception\ValidationException;
 use Illuminate\Http\Request;
+use App\Dtos\PagedResultDto;
 
 class ClienteController extends Controller
 {
     /**
      * @OA\Get(
-     *     path="/api/clientes",
+     *     path="/api/clientesGetAll/{pagina}",
      *     summary="Retorna lista de clientes",
      *     tags={"Clientes"},
+     *     @OA\Parameter(
+     *         name="página",
+     *         in="path",
+     *         description="Página que deseja",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
      *     @OA\Response(response="200", description="Lista de clientes")
      * )
      */
-    public function getAll()
+    public function getAll(int $pagina)
     {
         try {
-            return Cliente::all()->toJson();
+
+            $count = Cliente::count();
+            if (--$pagina < 0)
+                $pagina = 0;
+
+            // Definir o tamanho da página
+            $itemsPerPage = 5;
+            if ($pagina * $itemsPerPage >= $count)
+                $pagina--;
+
+            // Obter os clientes da página atual
+            $clientes = Cliente::query()
+                ->skip($itemsPerPage * $pagina)
+                ->take($itemsPerPage)
+                ->get();
+
+            $pagedResultDto = new PagedResultDto($count, ++$pagina, $clientes);
+            return view('app.clientes.index', compact('pagedResultDto'));
         } catch (\Throwable $e) {
             return response()->json(['erro' => $e->getMessage()]);
         }
@@ -84,19 +109,19 @@ class ClienteController extends Controller
      *     summary="Cadastra um cliente",
      *     tags={"Clientes"},
      *     @OA\RequestBody(
- *         required=true,
- *         @OA\MediaType(
- *             mediaType="application/json",
- *             @OA\Schema(
- *                 type="object",
- *                 required={"nome", "email", "telefone", "objetivo"},
- *                 @OA\Property(property="nome", type="string", example="John Doe"),
- *                 @OA\Property(property="email", type="string", format="email", example="john.doe@example.com"),
- *                 @OA\Property(property="telefone", type="string", example="35 99822 4443"),
- *                 @OA\Property(property="objetivo", type="string", example="Emagrecer")
- *             )
- *         )
- *     ),
+     *         required=true,
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="object",
+     *                 required={"nome", "email", "telefone", "objetivo"},
+     *                 @OA\Property(property="nome", type="string", example="John Doe"),
+     *                 @OA\Property(property="email", type="string", format="email", example="john.doe@example.com"),
+     *                 @OA\Property(property="telefone", type="string", example="35 99822 4443"),
+     *                 @OA\Property(property="objetivo", type="string", example="Emagrecer")
+     *             )
+     *         )
+     *     ),
      *     @OA\Response(response="200", description="Cliente criado")
      * )
      */
@@ -112,7 +137,6 @@ class ClienteController extends Controller
             ]);
 
             return Cliente::create($request->all());
-
         } catch (ValidationException $e) {
             return response()->json(['message' => 'Validation error', 'errors' => $e->getMessage()], 422);
         } catch (\Throwable $e) {
@@ -126,20 +150,20 @@ class ClienteController extends Controller
      *     summary="Atualiza um cliente",
      *     tags={"Clientes"},
      *     @OA\RequestBody(
- *         required=true,
- *         @OA\MediaType(
- *             mediaType="application/json",
- *             @OA\Schema(
- *                 type="object",
- *                 required={"id", "nome", "email", "telefone", "objetivo"},
- *                 @OA\Property(property="id", type="integer", example=1),
- *                 @OA\Property(property="nome", type="string", example="John Doe"),
- *                 @OA\Property(property="email", type="string", format="email", example="john.doe@example.com"),
- *                 @OA\Property(property="telefone", type="string", example="35 99822 4443"),
- *                 @OA\Property(property="objetivo", type="string", example="Emagrecer")
- *             )
- *         )
- *     ),
+     *         required=true,
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="object",
+     *                 required={"id", "nome", "email", "telefone", "objetivo"},
+     *                 @OA\Property(property="id", type="integer", example=1),
+     *                 @OA\Property(property="nome", type="string", example="John Doe"),
+     *                 @OA\Property(property="email", type="string", format="email", example="john.doe@example.com"),
+     *                 @OA\Property(property="telefone", type="string", example="35 99822 4443"),
+     *                 @OA\Property(property="objetivo", type="string", example="Emagrecer")
+     *             )
+     *         )
+     *     ),
      *     @OA\Response(response="200", description="Cliente atualizado")
      * )
      */
@@ -165,7 +189,6 @@ class ClienteController extends Controller
             $cliente->save();
 
             return response()->json($cliente, 200);
-
         } catch (ValidationException $e) {
             return response()->json(['message' => 'Validation error', 'errors' => $e->getMessage()], 422);
         } catch (\Throwable $e) {
@@ -193,7 +216,6 @@ class ClienteController extends Controller
         try {
 
             Cliente::destroy($id);
-
         } catch (\Throwable $e) {
             return response()->json(['erro' => $e->getMessage()]);
         }

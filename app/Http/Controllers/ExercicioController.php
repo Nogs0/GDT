@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Dtos\PagedResultDto;
 use App\Models\Exercicio;
 use Dotenv\Exception\ValidationException;
 use Illuminate\Http\Request;
@@ -11,16 +12,39 @@ class ExercicioController extends Controller
 {
     /**
      * @OA\Get(
-     *     path="/api/exercicios",
+     *     path="/api/exerciciosGetAll/{pagina}",
      *     summary="Retorna lista de exercícios",
      *     tags={"Exercícios"},
+     *     @OA\Parameter(
+     *         name="página",
+     *         in="path",
+     *         description="Página que deseja",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
      *     @OA\Response(response="200", description="Lista de exercícios")
      * )
      */
-    public function getAll()
+    public function getAll(int $pagina)
     {
         try {
-            return Exercicio::all()->toJson();
+            $count = Exercicio::count();
+            if (--$pagina < 0)
+                $pagina = 0;
+
+            // Definir o tamanho da página
+            $itemsPerPage = 5;
+            if ($pagina * $itemsPerPage >= $count)
+                $pagina--;
+
+            // Obter os treinos da página atual
+            $exercicio = Exercicio::query()
+                ->skip($itemsPerPage * $pagina)
+                ->take($itemsPerPage)
+                ->get();
+
+            $pagedResultDto = new PagedResultDto($count, ++$pagina, $exercicio);
+            return view('app.exercicios.index', compact('pagedResultDto'));
         } catch (\Throwable $e) {
             return response()->json(['erro' => $e->getMessage()]);
         }

@@ -1,0 +1,163 @@
+html {
+    height: 100%;
+    font-family: sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* content */
+
+.contentContainer {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+/* table */
+table {
+    border-spacing: 0;
+    width: 90%;
+    border-collapse: collapse;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+tr {
+    margin: 5px;
+    height: 50px;
+}
+
+td {
+    height: 50px;
+    padding: 15px;
+    text-align: center;
+    overflow: hidden;
+    border-right: 2px solid #0084FF;
+}
+
+th {
+    padding: 15px;
+    background-color: #0084FF;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+thead tr {
+    color: white;
+    border-radius: 20px;
+}
+
+thead th:first-of-type {
+    border-top-left-radius: 20px;
+}
+
+thead th:last-of-type {
+    border-top-right-radius: 20px;
+}
+
+tbody tr {
+    border-bottom: 1px solid grey;
+}
+
+tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+tbody tr:last-of-type {
+    border-bottom: 2px solid #0084FF;
+}
+
+tbody td:last-of-type {
+    border: none;
+}
+
+.tableContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* main */
+.main {
+    display: flex;
+    height: 100%;
+}
+
+/* sidebar */
+.sideBarContainer {
+    background-color: #0084FF;
+    width: 20%;
+}
+
+.menu {
+    font-size: 30px;
+}
+
+.menu ul {
+    list-style: none;
+}
+
+.menu a {
+    color: white;
+}
+
+.content {
+    width: 80%;
+    margin-left: 5%;
+    margin-right: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* card */
+.cardContainer {
+    width: 100%;
+    box-shadow: -5px 5px rgba(0, 0, 0, 0.192);
+    padding: 10px;
+    border-radius: 20px;
+    border: 0.5px solid rgba(0, 0, 0, 0.185);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* button */
+.buttonAddRegister {
+    padding: 10px;
+    font-weight: bold;
+    background-color: #0084FF;
+    font-size: 24px;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+/* pagination */
+.paginationContainer {
+    width: 90%;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    background-color: #0084FF;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    padding-top: 10px;
+}
+
+.paginationContainer p{
+    margin: 0;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+}
